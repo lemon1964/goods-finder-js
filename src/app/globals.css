@@ -1,0 +1,495 @@
+/* src/app/globals.css */
+@import "tailwindcss";
+
+/*
+  Минимальная база UI.
+  Идея: один контейнер + предсказуемые отступы + спокойная типографика.
+*/
+
+:root {
+  --app-bg: #f8fafc;
+  --app-text: #0f172a;
+  --app-muted: #64748b;
+  --app-border: #e2e8f0;
+
+  --space-2: 0.5rem; /* 8px */
+  --space-4: 1rem; /* 16px */
+  --space-6: 1.5rem; /* 24px */
+
+  --container-max: 72rem;
+  --container-gutter: 1rem; /* 16px */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* ширина/высота учитывают padding и border */
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+
+  background: var(--app-bg);
+  color: var(--app-text);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  line-height: 1.5;
+}
+
+/* Типографика: минимальный контроль, без неожиданных “прыгающих” отступов */
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.75rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.25rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.muted {
+  color: var(--app-muted);
+}
+
+/* Контейнер: одинаковая ширина для header/main/footer + стабильный “воздух” */
+.app-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-gutter);
+}
+
+@media (min-width: 640px) {
+  :root {
+    --container-gutter: 1.5rem; /* 24px */
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --container-gutter: 2rem; /* 32px */
+  }
+}
+
+
+/* Вертикальный ритм: отступы задаются через gap */
+.app-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.app-stack-sm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Отступы “тела” страницы (main) */
+.app-main {
+  padding-block: var(--space-6);
+}
+
+/* Утилиты из демо-части: остаются, чтобы ничего не сломалось */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn {
+  border: 1px solid currentColor;
+  border-radius: 10px;
+  padding: 8px 12px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn-ghost {
+  opacity: 0.85;
+}
+
+
+/* === UI-примитивы: секции, карточки, списки === */
+
+.app-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.app-section__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.app-card {
+  background: #ffffff;
+  border: 1px solid var(--app-border);
+  border-radius: 12px;
+  padding: var(--space-4);
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
+}
+
+.app-card--soft {
+  background: #f1f5f9;
+}
+
+.app-card--danger {
+  border-color: #fecaca;
+  background: #fef2f2;
+}
+
+.app-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.app-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.app-card-title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--app-text);
+  text-decoration: none;
+}
+
+.app-card-title:hover {
+  text-decoration: underline;
+}
+
+.app-meta {
+  margin-top: var(--space-2);
+  font-size: 0.85rem;
+  color: var(--app-muted);
+}
+
+.app-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.app-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+/* сетка карточек: сама сбрасывает колонки, без выезда вправо */
+.app-grid-cards {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+}
+
+/* важно для длинных строк/ссылок внутри карточек */
+.app-grid-cards > * {
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  .app-grid-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-grid-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.app-list-rows > li + li {
+  border-top: 1px solid var(--app-border);
+}
+
+.app-list-rows > li {
+  padding: 0.75rem 1rem;
+}
+
+
+/* === Ссылки и кнопки: hover / active / disabled === */
+
+a {
+  color: inherit;
+}
+
+/* Обычная “текстовая” ссылка в тексте */
+.app-link {
+  color: #2563eb; /* blue-600 */
+  text-decoration: none;
+}
+
+.app-link:hover {
+  text-decoration: underline;
+}
+
+.app-link:active {
+  color: #1d4ed8; /* blue-700 */
+}
+
+/*
+  Базовая кнопка.
+  Класс применяется и к <button>, и к <a> (Link) — удобно для “кнопка-ссылка”.
+*/
+.app-btn,
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  border: 1px solid var(--app-border);
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+
+  background: #ffffff;
+  color: var(--app-text);
+  text-decoration: none;
+
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+
+  cursor: pointer;
+  user-select: none;
+
+  transition: background 120ms ease, transform 80ms ease, border-color 120ms ease;
+}
+
+.app-btn:hover,
+.btn:hover {
+  background: #f8fafc;
+}
+
+.app-btn:active,
+.btn:active {
+  transform: translateY(1px); /* эффект “нажатия” */
+}
+
+/* Фокус с клавиатуры: видно, где находится курсор */
+.app-btn:focus-visible,
+.btn:focus-visible,
+.app-link:focus-visible {
+  outline: 2px solid #93c5fd; /* blue-300 */
+  outline-offset: 2px;
+}
+
+/* Disabled работает только для <button disabled>, поэтому оформляется отдельно */
+.app-btn:disabled,
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Варианты */
+.app-btn-primary {
+  background: #0f172a;
+  border-color: #0f172a;
+  color: #ffffff;
+}
+
+.app-btn-primary:hover {
+  background: #1e293b;
+  border-color: #1e293b;
+}
+
+.app-btn-ghost,
+.btn-ghost {
+  background: transparent;
+}
+
+.app-btn-ghost:hover,
+.btn-ghost:hover {
+  background: #f8fafc;
+}
+
+/* Навигация в хедере */
+.app-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.app-nav-link {
+  display: inline-flex;
+  align-items: center;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 0.4rem 0.6rem;
+
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #334155; /* slate-700 */
+
+  transition: background 120ms ease, border-color 120ms ease;
+}
+
+.app-nav-link:hover {
+  background: #f1f5f9;
+  border-color: var(--app-border);
+}
+
+.app-nav-link:active {
+  transform: translateY(1px);
+}
+
+/* Активный пункт определяется aria-current="page" */
+.app-nav-link[aria-current="page"] {
+  background: #0f172a;
+  border-color: #0f172a;
+  color: #ffffff;
+}
+
+
+/* === Empty State: “нет данных / ничего не найдено” === */
+
+.app-empty {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.app-empty__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--app-text);
+}
+
+.app-empty__desc {
+  font-size: 0.9rem;
+  color: var(--app-muted);
+}
+
+.app-empty__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+
+/* === Панель действий: одинаковая сетка кнопок/ссылок === */
+.app-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+
+
+
+/* Подключение Tailwind */
+/* === Dark skin для витрины: дизайн-токены === */
+:root {
+  color-scheme: dark;
+
+  --app-bg: #0b1220;
+  --app-surface: rgba(15, 23, 42, 0.88);   /* карточки */
+  --app-surface-2: rgba(15, 23, 42, 0.65); /* мягкие блоки */
+  --app-border: rgba(226, 232, 240, 0.18);
+
+  --app-text: #e2e8f0;
+  --app-muted: #94a3b8;
+}
+
+html,
+body {
+  background: var(--app-bg);
+  color: var(--app-text);
+}
+
+/* карточки */
+.app-card {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-color: var(--app-border);
+
+  /* базовая глубина */
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.35);
+
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+}
+
+.app-card--soft {
+  background: var(--app-surface-2);
+}
+
+.app-card--danger {
+  background: rgba(239, 68, 68, 0.10);
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+/* “живость” витрины: добавлять к карточкам точечно */
+.app-card-lift {
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+}
+
+.app-card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  border-color: rgba(226, 232, 240, 0.26);
+}
+
+/* кнопки (общая читабельность в тёмной теме) */
+.app-btn,
+.btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--app-border);
+  color: var(--app-text);
+}
+
+.app-btn:hover,
+.btn:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.app-btn-primary {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #0f172a;
+}
+
+.app-btn-primary:hover {
+  background: #e2e8f0;
+  border-color: #e2e8f0;
+}
+
+.app-btn-ghost,
+.btn-ghost {
+  background: transparent;
+  color: var(--app-text);
+  border-color: var(--app-border);
+}
+
+.app-btn-ghost:hover,
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
