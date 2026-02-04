@@ -40,21 +40,21 @@ export default function HomePage() {
           <h2 className="app-h2">Возможности</h2>
 
           <ul className="app-grid app-grid-cards">
-            <li className="app-card app-stack-sm">
+            <li className="app-card app-card-lift app-stack-sm">
               <div className="inline-flex w-fit rounded-full bg-white/10 px-2 py-0.5 text-xs font-semibold text-slate-100 ring-1 ring-white/15">
                 Поиск
               </div>
               <div className="app-muted">Фильтр по запросу в списке товаров.</div>
             </li>
 
-            <li className="app-card app-stack-sm">
+            <li className="app-card app-card-lift app-stack-sm">
               <div className="inline-flex w-fit rounded-full bg-white/10 px-2 py-0.5 text-xs font-semibold text-slate-100 ring-1 ring-white/15">
                 Избранное
               </div>
               <div className="app-muted">Быстрый доступ к отмеченным товарам.</div>
             </li>
 
-            <li className="app-card app-stack-sm">
+            <li className="app-card app-card-lift app-stack-sm">
               <div className="inline-flex w-fit rounded-full bg-white/10 px-2 py-0.5 text-xs font-semibold text-slate-100 ring-1 ring-white/15">
                 История
               </div>
@@ -65,7 +65,7 @@ export default function HomePage() {
       </MotionFadeIn>
 
       <MotionFadeIn delay={0.12}>
-        <section className="app-card app-stack-sm">
+        <section className="app-card app-card-lift app-stack-sm">
           <div className="inline-flex w-fit rounded-full bg-white/10 px-2 py-0.5 text-xs font-semibold text-slate-100 ring-1 ring-white/15">
             Демо маршрутов
           </div>
