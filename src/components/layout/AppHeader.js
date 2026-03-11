@@ -1,6 +1,7 @@
 // src/components/layout/AppHeader.js
 import Link from "next/link";
 import AppNav from "./AppNav";
+import AudioToggle from "./AudioToggle";
 
 export default function AppHeader() {
   return (
@@ -13,7 +14,12 @@ export default function AppHeader() {
           Goods Finder
         </Link>
 
-        <AppNav />
+        <div className="flex items-center gap-2">
+          <AudioToggle />
+          <AppNav />
+        </div>
+        {/* <AudioToggle />
+        <AppNav /> */}
       </div>
     </header>
   );
