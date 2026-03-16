@@ -1,4 +1,8 @@
 // src/app/(site)/page.js
+"use client";
+// use client из-за кнопки открытия товаров
+import { track } from "@/utils/track";
+
 import Link from "next/link";
 import MotionFadeIn from "@/components/motion/MotionFadeIn";
 
@@ -14,9 +18,16 @@ export default function HomePage() {
           </p>
 
           <div className="mt-4 flex flex-wrap gap-2">
-            <Link href="/goods" className="app-btn app-btn-primary shadow-sm hover:shadow-md">
+            <Link
+              href="/goods"
+              className="app-btn app-btn-primary shadow-sm hover:shadow-md"
+              onClick={() => track("studying_lab", "GFCourse")}
+            >
               Открыть товары
             </Link>
+            {/* <Link href="/goods" className="app-btn app-btn-primary shadow-sm hover:shadow-md">
+              Открыть товары
+            </Link> */}
 
             <Link
               href="/goods/favorites"
