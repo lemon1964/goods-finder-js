@@ -21,8 +21,8 @@ export default function HomePage() {
             <Link
               href="/goods"
               className="app-btn app-btn-primary shadow-sm hover:shadow-md"
-              onClick={() => track("studying_lab", "GFCourse")}
-            >
+              onClick={() => track("open_goods", "GFCourse")}
+              >
               Открыть товары
             </Link>
             {/* <Link href="/goods" className="app-btn app-btn-primary shadow-sm hover:shadow-md">
